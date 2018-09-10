@@ -10,12 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180904163915) do
+ActiveRecord::Schema.define(version: 20180906162037) do
+
+  create_table "board_user_relations", force: :cascade do |t|
+    t.integer "board_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_board_user_relations_on_board_id"
+    t.index ["user_id"], name: "index_board_user_relations_on_user_id"
+  end
+
+  create_table "boards", force: :cascade do |t|
+    t.string "title"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_boards_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "repeater"
+    t.boolean "completed"
+    t.string "tags"
+    t.datetime "start_date"
+    t.datetime "deadline"
+    t.integer "user_id"
+    t.integer "board_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_events_on_board_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"

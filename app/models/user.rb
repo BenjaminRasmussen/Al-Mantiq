@@ -8,7 +8,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
-
+  has_many :board_user_relations
+  has_many :boards, through: :board_user_relations
+  has_many :events
 
   class << self
     # Returns the hash digest of the given string.
@@ -21,12 +23,13 @@ class User < ApplicationRecord
     def new_token
       SecureRandom.urlsafe_base64
     end
+
   end
 
-
-
-
-
-
+  private
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
 
 end
