@@ -1,0 +1,11 @@
+<ul class="events">
+  <% @boards.each do |board| %>
+    <% board.events.each do |event| %>
+    <li>
+      <a href="http://0.0.0.0:3000/events/<%= event.id %>">
+        <%= event.title %>
+      </a>
+    </li>
+    <% end %>
+  <% end %>
+</ul>

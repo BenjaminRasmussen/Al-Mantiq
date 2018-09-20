@@ -1,0 +1,16 @@
+<%= form_for(BoardUserRelation.find(params[:f]), remote: request.xhr?, html: { data: { modal: true } }) do |f| %>
+  <% provide(:title, "Edit existing relationship") %>
+
+  <div class="modal-body">
+    <%= f.label :user_id, 'Other users\' email' %>
+    <%= f.text_field :user_id, class: 'form-control',
+    :value => User.find(BoardUserRelation.find(params[:f]).user_id).email %>
+    <%= f.hidden_field(:board_id, :value => last_board) %>
+    <%= f.label :admin, 'Admin status' %>
+    <%= f.check_box :admin, class: 'form-control' %>
+  </div>
+
+  <div class="modal-footer">
+    <%= f.submit "+ Add User", class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end %>

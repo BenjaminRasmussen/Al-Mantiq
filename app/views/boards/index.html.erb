@@ -1,0 +1,32 @@
+<div class="board-container" style="overflow:scroll;">
+  <h1>These are your boards</h1>
+  <ul class="boards">
+    <% @boards.each do |board| %>
+      <li>
+        <h3>
+          <a href="http://0.0.0.0:3000/boards/<%=board.id%>"><%=board.title%></a>
+        </h3>
+        <ul>
+          <% unless board.users.size == 0 %>
+            <h4>Users to whom this board is shared with other than the owner</h4>
+          <% end %>
+          <% board.users.each do |user| %>
+            <li>
+              <%= user %>
+            </li>
+          <% end %>
+        </ul>
+        <% unless board.events.size == 0 %>
+          <h4>Events which are appended to this board</h4>
+        <% end %>
+        <ul>
+          <% board.events.each do |event| %>
+              <li>
+                <%= event.title %>
+              </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>

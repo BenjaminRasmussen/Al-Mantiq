@@ -1,0 +1,15 @@
+<ul class="boards">
+  <% @boards.each do |board| %>
+    <li>
+      <div class="child-container">
+        <div class="left-leaning">
+          <%= board.users.count + 1 %>
+          <a href="http://0.0.0.0:3000/boards/<%=board.id%>" data-turbolinks="false"><%=board.title%></a>
+        </div>
+        <div class="right-leaning">
+          <a href="http://0.0.0.0:3000/detailboard/<%=board.id%> " data-turbolinks="false">● ● ●</a>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

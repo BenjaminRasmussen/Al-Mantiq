@@ -1,0 +1,25 @@
+<% locals[:board].events.each do |event| %>
+  <tr>
+    <td><%= event.title %></td>
+    <td><%= event.description %></td>
+    <td><%= event.start_date %></td>
+    <td><%= event.deadline %></td>
+    <td><%= event.completed %></td>
+    <td style="text-align: right">
+      <div class="btn-group" role="group">
+        <%= link_to 'Edit',
+            edit_event_path(:event_id => event.id, :id => event.id),
+            class: 'btn btn-warning',
+            data: { modal: true }  %>
+        <script>
+          $(".a-unique-class").html(
+            '<%= j render "events/edit" %>')
+        </script>
+        <%= link_to "delete", event,  method: :delete,
+                                      data: { confirm: "You sure?" },
+                                      class: "btn btn-danger",
+                                      type: "button" %>
+      </div>
+    </td>
+  </tr>
+<% end %>

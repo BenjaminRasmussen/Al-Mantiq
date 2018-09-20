@@ -1,11 +1,14 @@
+<% provide(:title, "Dashboard") %>
 <div class="body">
   <div class="greeting">
-    <h1>Good day current_user.name !</h1>
+    <h1>Good day <%= current_user.name %>!</h1>
     <div id="date"></div>
     <div id="display"></div>
     <p><div id="quote"></div></p>
+    <h3> Here's a list of your upcomming events</h3>
+        <%= render 'events/detail_index', :locals => {:boards => @boards } %>
   </div>
-
+</div>
 
   <script>
   function startTime() {
@@ -566,7 +569,8 @@
        'Your analyst has you confused with another patient.',
        'Your boss is thinking about you.',
        "Your ex just called....she's with the IRS now.",
-       'Your weapon was made by the lowest bidder!'];
+       'Your weapon was made by the lowest bidder!'
+     ];
 
   function startDate() {
     var d = new Date();
@@ -574,10 +578,9 @@
     document.getElementById("date").innerHTML = days[d.getDay()]+" | "+[d.getMonth()+1]+"/"+d.getDate()+"/"+d.getFullYear();
   }
   function onLoadFunctions(){
-    genQuote();
+        genQuote();
     startTime();
   }
+
   window.onload = onLoadFunctions;
   </script>
-    <%= render 'shared/board_week' %>
-</div>

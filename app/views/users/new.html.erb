@@ -1,5 +1,19 @@
-<h1>New User</h1>
+<div class="form">
+  <h3>Sign up</h3>
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
 
-<%= render 'form', user: @user %>
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
 
-<%= link_to 'Back', users_path %>
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <br>
+      <%= f.submit "Create my account", class: "btn btn-primary btn-lg btn-block" %>
+    <% end %>
+</div>

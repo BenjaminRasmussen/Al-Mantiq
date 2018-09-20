@@ -1,0 +1,12 @@
+<%= form_for(@board_user_relation) do |f| %>
+  <%= f.label :user_id, 'Other users\' email' %>
+  <div class="form-inline" style="width: 100%;">
+    <%= f.text_field :user_id, class: 'form-control',
+        style: "width: 100%; max-width: 525px;" %>
+    <%= f.hidden_field(:board_id, :value => last_board) %>
+    <%= f.label :admin, 'Admin status' %>
+    <%= f.check_box :admin, class: 'form-control' %>
+
+    <%= f.submit "+ Add User", class: "btn btn-primary" %>
+  </div>
+<% end %>

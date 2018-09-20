@@ -1,0 +1,17 @@
+<h4>List events which are appended to this board:</h4>
+<table class="table">
+  <thead>
+
+    <tr>
+      <th> Event title </th>
+      <th> Event description </th>
+      <th> Start Date </th>
+      <th> Deadline </th>
+      <th> Completion Status </th>
+      <th style="text-align: right"> Edit / Delete </th>
+    </tr>
+    <% locals[:boards].each do |board| %>
+      <%= render 'events/detail_index_builder', :locals => {:board => board} %>
+    <% end %>
+  </thead>
+</table>

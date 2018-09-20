@@ -2,15 +2,31 @@
   <h1>Your boards</h1>
   <hr style="width: 75%;">
   <li>
-    <ul><a href="#">Overview</a></ul>
+    <ul><a href="http://0.0.0.0:3000/boards">Overview</a></ul>
     <hr style="width: 75%;">
-    <ul><a href=#>Board 1</a></ul>
-    <ul><a href=#>Board 2</a></ul>
-    <ul><a href=#>Board 3</a></ul>
+
+    <% if @boards != nil %>
+        <%= render 'boards/index' %>
+    <% end %>
   </li>
   <br>
 </div>
 
-  <div class="button-container">
-    <a href=# class="btn btn-primary btn-lg btn-block" id="button">Add board</a>
+  <div class="form-holder">
+    <%= form_for Board.new do |f| %>
+
+    <hr style="width: 75%;">
+
+      <div class="modal-body">
+
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+
+        <%= f.hidden_field(:user_id, :value => current_user.id) %>
+      </div>
+
+      <div class="modal-footer">
+        <%= f.submit class: 'btn btn-primary btn-lg btn-block' %>
+      </div>
+    <% end %>
   </div>

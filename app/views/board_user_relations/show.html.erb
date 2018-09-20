@@ -1,0 +1,12 @@
+<div class="body">
+  <h1>Board & User relationship control panel</h1>
+
+  <h3> update relationship </h3>
+
+
+  <h3> delete relationship </h3>
+  <%= link_to "delete", @board_user_relation, method: :delete,
+                               data: { confirm: "You sure?" },
+                               class: "btn btn-danger",
+                               type: "button" %>
+</div>

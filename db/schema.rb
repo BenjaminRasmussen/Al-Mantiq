@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910032453) do
+ActiveRecord::Schema.define(version: 20180920144552) do
 
   create_table "board_user_relations", force: :cascade do |t|
     t.integer "board_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.index ["board_id"], name: "index_board_user_relations_on_board_id"
     t.index ["user_id"], name: "index_board_user_relations_on_user_id"
   end

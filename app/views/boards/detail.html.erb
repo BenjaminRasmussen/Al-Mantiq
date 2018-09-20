@@ -1,0 +1,94 @@
+<div class="modal hide fade" id="my-modal" title="My modal">
+  <div class="modal-header">
+    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+    <h3 id="myModalLabel">New Post</h3>
+  </div>
+  <div class="modal-body a-unique-class">
+    New Post Body
+  </div>
+  <div class="modal-footer">
+    <button aria-hidden="true" class="btn" data-dismiss="modal">Close</button>
+  </div>
+</div>
+
+<div class="info-container-container" style="overflow:scroll;"> <!-- sorry for this name convention -->
+  <div class="info-container">
+    <h1>Settings for <%= @board.title %> </h1>
+    <hr style="width: 75%;">
+    <h3>Basic info</h3>
+      <br>
+      <h4>List of users to whom this board is shared:</h4>
+      <table class="table">
+        <thead>
+
+          <tr>
+            <th>Name</th>
+            <th>Admin Status</th>
+            <th style="text-align: right">Edit/Delete</th>
+          </tr>
+          <% if @board.users.size != 0 %>
+          <tr>
+            <td><%= User.find(@board.user_id).name %></td>
+            <td>true</td>
+            <td></td>
+          </tr>
+          <% end %>
+
+          <% @board.board_user_relations.each do |board_user_relation| %>
+            <tr>
+              <td><%= User.find(board_user_relation.user_id).name %></td>
+              <td><%= board_user_relation.admin %></td>
+              <td style="text-align: right">
+                <div class="btn-group" role="group">
+                  <%= link_to 'Edit',
+                      edit_board_user_relation_path(:f => board_user_relation),
+                      class: 'btn btn-warning',
+                      data: { modal: true }
+                  %>
+                  <script>
+                    $(".a-unique-class").html(
+                      '<%= j render "board_user_relations/form_for" %>')
+                  </script>
+                  <%= link_to "delete",
+                      board_user_relation,
+                      method: :delete,
+                      data: { confirm: "You sure?" },
+                      class: "btn btn-danger",
+                      type: "button" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @board.users.size == 0 %>
+            <tr>
+              <td>
+                This list looks empty!
+              </td>
+              <td></td>
+            </tr>
+          <% end %>
+
+        </thead>
+      </table>
+
+      <br>
+        <%= render 'events/detail_index', :locals => {:boards => [@board,]} %>
+      <br>
+      <div class="relation-form-container">
+        <h4>Add a new user to the board</h4>
+        <%= render 'board_user_relations/form_for' %>
+      </div>
+
+      <br>
+
+      <div class="delete-form-container">
+        <h4> Board specific actions </h4>
+        Delete this board (WARNING: BOARD AND EVENTS ARE NOT RECOVERABLE!):
+        <%= link_to "delete", @board, method: :delete,
+                                      data: { confirm: "You sure?" },
+                                      class: "btn btn-danger",
+                                      type: "button" %>
+      </div>
+  </div>
+</div>

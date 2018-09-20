@@ -13,6 +13,7 @@
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
+
       <% if logged_in? %>
       <div class="header">
         <%= render'layouts/header' %>
@@ -22,13 +23,17 @@
       </div>
       <div class="content">
         <%= yield %>
+        <div id="modal-holder"></div>
       </div>
       <div class="footer">
         <%= render'layouts/footer' %>
       </div>
       <% else %>
+      <div class="login-form">
         <%= yield %>
+      </div>
       <% end %>
     </div>
+
   </body>
 </html>

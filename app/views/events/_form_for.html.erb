@@ -1,0 +1,43 @@
+<%= form_for(@event) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, class: 'form-control' %>
+
+  <br>
+  <div class="form-inline">
+    <div class="left-leaning">
+      <%= f.label :deadline %>
+      <%= f.text_field :deadline, class: 'form-control', style: 'width: 106px;' %>
+    </div>
+    <div class="right-leaning">
+      <%= f.label :repeater %>
+      <%= f.number_field :repeater, class: 'form-control', style: 'width: 104px;' %>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="form-inline">
+    <div class="left-leaning">
+      <%= f.label :start_date %>
+      <%= f.text_field :start_date, class: 'form-control', style: 'width: 100px;' %>
+    </div>
+    <div class="right-leaning">
+      <%= f.label :completed %>
+      <%= f.check_box :completed, class: 'form-control' %>
+    </div>
+  </div>
+
+  <br><br>
+  <%= f.label :tags %>
+  <%= f.text_field :tags, class: 'form-control' %>
+
+  <br>
+  <%= f.hidden_field(:user_id, :value => current_user.id) %>
+  <%= f.hidden_field(:board_id, :value => last_board) %>
+
+  <%= f.submit "Create Event", class: "btn btn-primary btn-lg btn-block" %>
+<% end %>
