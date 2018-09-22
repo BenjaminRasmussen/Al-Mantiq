@@ -4,6 +4,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    respond_modal_with @event
     @events = Event.all
     @boards = Board.all
   end
@@ -12,7 +13,7 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
     if @event.save
       flash[:success] = "Event Created!"
-      redirect_to root_url
+      redirect_to board_path(@event.board)
     else
       render 'static_pages/home'
     end

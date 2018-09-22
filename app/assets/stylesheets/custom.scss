@@ -395,6 +395,14 @@ body {
     }
   }
 
+  .event-board{
+    .event{
+      span{
+        width: inherit;
+        font-size: 12px;
+      }
+    }
+  }
 
   .footer {
     grid-area: footer;

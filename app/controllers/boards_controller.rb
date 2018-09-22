@@ -34,7 +34,23 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     session[:board_id] = @board.id
     cookies[:board_id] = @board.id
-    @events = @board.events
+    # Define current or searched date
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    # Paginate by week
+    @events = @board.events.where(start_date:
+      (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
+    ).or(@board.events.where(deadline:
+      (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
+      ))
+    @events_by_date = @events.group_by(&:start_date)
+    # Filter duplicate tags
+    @events_by_tags = []
+    @events.each do |f|
+      f.tags.split.each do |x|
+       @events_by_tags.push(x.downcase)
+      end
+    end
+    @events_by_tags = @events_by_tags.to_set.to_a
   end
 
   def destroy

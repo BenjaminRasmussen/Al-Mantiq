@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180920144552) do
+ActiveRecord::Schema.define(version: 20180921150318) do
 
   create_table "board_user_relations", force: :cascade do |t|
     t.integer "board_id"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 20180920144552) do
     t.integer "repeater"
     t.boolean "completed"
     t.string "tags"
-    t.datetime "start_date"
-    t.datetime "deadline"
+    t.date "start_date"
+    t.date "deadline"
     t.integer "user_id"
     t.integer "board_id"
     t.datetime "created_at", null: false

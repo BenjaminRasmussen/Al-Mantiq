@@ -33,11 +33,13 @@ class BoardUserRelationsController < ApplicationController
   end
 
   def update
-    @board_user_relation = BoardUserRelation.find_by(user_id: params[:user_id],
-                                                     board_id: params[:board_id])
-    if @board_user_relation.update_attributes(board_user_relation_params)
-      flash[:success] = "BoardUserRelation updated"
-      redirect_to @board_user_relation
+    @board_user_relation = BoardUserRelation.find(params[:id])
+    @board_user_relation.user_id = User.find_by(email: board_user_relation_params[:user_id]).id
+    @board_user_relation.board_id = board_user_relation_params[:board_id]
+    @board_user_relation.admin = board_user_relation_params[:admin]
+    if @board_user_relation.save!
+    flash[:success] = "BoardUserRelation updated"
+    redirect_to @board_user_relation.board
     else
       render 'edit'
     end

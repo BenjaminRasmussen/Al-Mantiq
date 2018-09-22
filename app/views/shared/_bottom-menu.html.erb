@@ -1,6 +1,13 @@
-
 <div class="bottom-menu">
   <div class="menu-container">
-    <a class="btn btn-success" href="http://0.0.0.0:3000/event" role="button">+ Add event</a>
+    <%= link_to '+ Add Event',
+        new_event_path,
+        class: 'btn btn-success',
+        data: { modal: true }  %>
+    <script>
+      $(".a-unique-class").html(
+        '<%= j render "events/form" %>'
+      )
+    </script>
   </div>
 </div>

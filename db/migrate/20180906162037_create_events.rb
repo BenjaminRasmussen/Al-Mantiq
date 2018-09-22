@@ -6,8 +6,8 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.integer :repeater
       t.boolean :completed
       t.string :tags
-      t.datetime :start_date
-      t.datetime :deadline
+      t.date :start_date
+      t.date :deadline
       t.references :user, foreign_key: true
       t.references :board, foreign_key: true
 

@@ -4,4 +4,3 @@
 jQuery ->
   $('#event_start_date').datepicker()
   $('#event_deadline').datepicker()
-  dateFormat: 'yy-mm-dd'

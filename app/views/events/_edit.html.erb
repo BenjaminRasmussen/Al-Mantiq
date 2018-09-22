@@ -14,8 +14,8 @@
       <br>
       <div class="form-inline">
         <div class="left-leaning">
-          <%= f.label :deadline %>
-          <%= f.text_field :deadline, class: 'form-control', style: 'width: 106px;' %>
+          <%= f.label :start_date %>
+          <%= f.text_field :start_date, class: 'form-control', style: 'width: 100px;' %>
         </div>
         <div class="right-leaning">
           <%= f.label :repeater %>
@@ -26,8 +26,8 @@
       <br><br>
       <div class="form-inline">
         <div class="left-leaning">
-          <%= f.label :start_date %>
-          <%= f.text_field :start_date, class: 'form-control', style: 'width: 100px;' %>
+          <%= f.label :deadline %>
+          <%= f.text_field :deadline, class: 'form-control', style: 'width: 106px;' %>
         </div>
         <div class="right-leaning">
           <%= f.label :completed %>
@@ -48,6 +48,11 @@
       <%= f.submit "Create Event", class: "btn btn-primary btn-lg btn-block" %>
     </div>
   <% end %>
+  <script>
+  jQuery(function() {
+    $('#event_start_date').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#event_deadline').datepicker({dateFormat: 'yy-mm-dd'});  });
+  </script>
   <% else %>
   <h1> 404! ERROR. EVENT NOT FOUND </h1>
 <% end %>

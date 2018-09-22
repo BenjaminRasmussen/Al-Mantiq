@@ -11,5 +11,9 @@ class Event < ApplicationRecord
   validates :user_id, presence: true
   validates :board_id, presence: true
 
+  def taglist
+    taglist ||= self.tags.split
+    taglist = taglist.map(&:downcase)
+  end
 
 end

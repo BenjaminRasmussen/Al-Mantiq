@@ -2,6 +2,7 @@
   <%= render 'shared/top-menu' %>
   <table class="table">
     <thead>
+    <!--
       <tr>
         <th scope="col">#</th>
         <th id="day" scope="col">Monday</th>
@@ -34,48 +35,47 @@
         <td></td>
         <td></td>
       </tr>
+    -->
+    <%= calendar do |date| %>
+      <div class="event-board" style="width: 100%; height: 100%; display: grid;
+                                grid-template-columns: auto;;
+                                grid-template-rows: 34px repeat(<%= @events_by_tags.size %>, 125px);
+                                grid-gap: 15px 10px;">
+        <span style="grid-row: 0 / 1;"><%= date.day %></span>
 
-      <tr>
-        <th scope="row" id="tag"></th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <div id="event">
-            <h2>Event_title</h2>
-            <p>Event_Description</p>
-          </div>
-        </td>
-        <td></td>
-        <td>
-          <div id="event">
-            <h2>Event_title</h2>
-            <p>Event_Description</p>
-          </div>
-        </td>
-      </tr>
+        <% if @events_by_date[date] %>
+            <% @events_by_date[date].each do |event| %>
+              <% if event.taglist.empty? %>
+              <div class="event" style="grid-row: 2 / 3;
+                                        max-height: 125px; width: inherit;
+                                        background: lightblue;">
+                <span><%= event.title %></span><br>
+                <span><%= event.description %></span><br>
+                <% if event.completed %>
+                  <span>Complete!</span>
+                <% else %>
+                  <span>Incomplete!</span>
+                <% end %>
+                </div>
+              <% end %>
 
-      <tr>
-        <th scope="row" id="tag">Caroline</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <div id="event">
-            <h2>Støvsugning</h2>
-            <p>Caroline skal støvsuge</p>
-          </div>
-        </td>
-        <td></td>
-        <td>
-          <div id="event">
-            <h2>Event_title</h2>
-            <p>Event_Description</p>
-          </div>
-        </td>
-      </tr>
+              <% event.taglist.each do |tag| %>
+                <div class="event" style="grid-row: <%= @events_by_tags.index(tag) + 3 %> / <%= @events_by_tags.index(tag) + 4 %>;
+                                          height: 125px; width: inherit;
+                                          background: lightblue;">
+                  <span><%= event.title %> from <%= tag %></span><br>
+                  <span><%= event.description %></span><br>
+                  <% if event.completed %>
+                    <span>Complete!</span>
+                  <% else %>
+                    <span>Incomplete!</span>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+        <% end %>
+      </div>
+    <% end %>
     </tbody>
   </table>
 
