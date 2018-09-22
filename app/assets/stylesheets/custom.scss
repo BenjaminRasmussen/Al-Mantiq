@@ -349,21 +349,21 @@ body {
                 overflow: hidden;
                 float: left;
                 .event-title, .event-title span{
-                  display: inline-block;
                   font-size: 14px;
                   text-align: center;
-                }
-                .event-body, .event-body span{
-                  display: inline-block;
-                  font-size: 12px;
-                  text-align: left;
                   overflow: hidden;
 
                 }
+                .event-body, .event-body span{
+                  font-size: 12px;
+                  text-align: left;
+                  overflow: hidden;
+                }
                 .event-footer, .event-footer span{
-                  display: inline-block;
                   font-size: 12;
                   text-align: center;
+                  overflow: hidden;
+
                 }
               }
             }

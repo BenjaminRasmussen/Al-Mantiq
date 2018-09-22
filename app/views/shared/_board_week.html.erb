@@ -13,6 +13,8 @@
         <% if @events_by_date[date] %>
             <% @events_by_date[date].each do |event| %>
               <% if event.taglist.empty? %>
+              <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
+                  data: { modal: true } do  %>
               <div class="event" style="grid-row: 2 / 3;
                                         <% if event.completed %>
                                           background: lightgreen;
@@ -30,16 +32,18 @@
 
                   </div>
                 </div>
+                <% end %>
               <% end %>
 
               <% event.taglist.each do |tag| %>
+                <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
+                    data: { modal: true } do  %>
                 <div class="event" style="grid-row: <%= @events_by_tags.index(tag) + 3 %> / <%= @events_by_tags.index(tag) + 4 %>;
                                           <% if event.completed %>
                                             background: lightgreen;
                                           <% else %>
                                             background: lightyellow;
-                                          <% end %>
-                                          ">
+                                          <% end %>">
                       <div class="event-title">
                         <%= event.title %> from <%= tag %>
                       </div>
@@ -50,6 +54,7 @@
 
                       </div>
                 </div>
+                <% end %>
               <% end %>
             <% end %>
         <% end %>
