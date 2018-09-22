@@ -43,6 +43,7 @@ class BoardsController < ApplicationController
       (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
       ))
     @events_by_date = @events.group_by(&:start_date)
+    @deadlines_by_date = @events.group_by(&:deadline)
     # Filter duplicate tags
     @events_by_tags = []
     @events.each do |f|
