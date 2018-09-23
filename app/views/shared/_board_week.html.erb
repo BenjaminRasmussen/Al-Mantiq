@@ -3,18 +3,18 @@
   <table class="table">
     <thead>
 
-    <%= @deadlines_by_date %>
     <%= calendar do |date| %>
       <div class="event-board" style="display: grid;
                                 grid-template-columns: auto;;
                                 grid-template-rows: 34px repeat(<%= @events_by_tags.size + 1 %>, 125px);
-                                grid-gap: 15px 10px;">
+                                grid-gap: 15px 10px ;">
         <span style="grid-row: 1 / 2; text-align: center; font-size: 12px;"><%= date.day %></span>
         <% if @events_by_date[date] %>
             <% @events_by_date[date].each do |event| %>
+
+
               <% if event.taglist.empty? %>
-              <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
-                  data: { modal: true } do  %>
+
               <div class="event" style="grid-row: 2 / 3;
                                         <% if event.completed %>
                                           background: lightgreen;
@@ -22,6 +22,9 @@
                                           background: lightyellow;
                                         <% end %>
                                         ">
+                  <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
+                                            data: { modal: true },
+                                            style: "width: 100%; height: 100%;" do  %>
                   <div class="event-title">
                       <%= event.title %>
                   </div>
@@ -35,15 +38,19 @@
                 <% end %>
               <% end %>
 
+
+
               <% event.taglist.each do |tag| %>
-                <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
-                    data: { modal: true } do  %>
+
                 <div class="event" style="grid-row: <%= @events_by_tags.index(tag) + 3 %> / <%= @events_by_tags.index(tag) + 4 %>;
                                           <% if event.completed %>
                                             background: lightgreen;
                                           <% else %>
                                             background: lightyellow;
                                           <% end %>">
+                                          <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
+                                              data: { modal: true },
+                                              style: "width: 100%; height: 100%;" do  %>
                       <div class="event-title">
                         <%= event.title %> from <%= tag %>
                       </div>
@@ -57,6 +64,58 @@
                 <% end %>
               <% end %>
             <% end %>
+        <% end %>
+
+
+        <% if @deadlines_by_date[date] %>
+          <% @deadlines_by_date[date].each do |event| %>
+
+              <% if event.taglist.empty? %>
+
+                    <div class="deadline" style="grid-row: 2 / 3;
+                                              <% if event.completed %>
+                                                background: lightgreen;
+                                              <% else %>
+                                                background: red;
+                                              <% end %>
+                                              ">
+                                              <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
+                                                  data: { modal: true },
+                                                  style: "width: 100%; height: 100%;" do  %>
+                      <div class="event-title">
+                        Deadline for <%= event.title %>
+                      </div>
+                      <div class="event-body">
+                      </div>
+                      <div class="event-footer">
+                      </div>
+                    </div>
+                <% end %>
+              <% end %>
+
+              <% event.taglist.each do |tag| %>
+
+                    <div class="deadline" style="grid-row: <%= @events_by_tags.index(tag) + 3 %> / <%= @events_by_tags.index(tag) + 4 %>;
+                                              <% if event.completed %>
+                                                background: lightgreen;
+                                              <% else %>
+                                                background: red;
+                                              <% end %>
+                                              ">
+                                              <%= link_to edit_event_path(:event_id => event.id, :id => event.id),
+                                                  data: { modal: true },
+                                                  style: "width: 100%; height: 100%;" do  %>
+                      <div class="event-title">
+                        Deadline for <%= event.title %> by <%= tag %>
+                      </div>
+                      <div class="event-body">
+                      </div>
+                      <div class="event-footer">
+                      </div>
+                    </div>
+                <% end %>
+              <% end %>
+          <% end %>
         <% end %>
 
     <% end %>

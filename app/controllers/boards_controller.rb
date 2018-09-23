@@ -37,11 +37,13 @@ class BoardsController < ApplicationController
     # Define current or searched date
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     # Paginate by week
-    @events = @board.events.where(start_date:
-      (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
-    ).or(@board.events.where(deadline:
-      (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
-      ))
+    @events = @board.events.where(
+      start_date:
+        (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
+         ).or(@board.events.where(
+      deadline:
+        (@date.beginning_of_week)..@date.advance(days: 7).beginning_of_week
+    ))
     @events_by_date = @events.group_by(&:start_date)
     @deadlines_by_date = @events.group_by(&:deadline)
     # Filter duplicate tags
