@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :boards
   resources :board_user_relations
   resources :events
+  resources :users
 
   root 'static_pages#home'
 
@@ -17,10 +18,5 @@ Rails.application.routes.draw do
   get    '/detailboard/:id', to: 'boards#detail'
   post   '/detailboard',  to: 'board_user_relations#create'
 
-  resources :users do
-    member do
-      get :boards
-    end
-  end
 
 end

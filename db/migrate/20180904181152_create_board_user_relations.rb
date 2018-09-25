@@ -6,5 +6,8 @@ class CreateBoardUserRelations < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    add_index :board_user_relations, :board
+    add_index :board_user_relations, :user
+    add_index :board_user_relations, [:board, :user], unique: true
   end
 end
