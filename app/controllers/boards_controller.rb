@@ -1,7 +1,6 @@
 class BoardsController < ApplicationController
 
   def new
-    @boards = Board.all
     @board = Board.new
   end
 
@@ -16,12 +15,10 @@ class BoardsController < ApplicationController
   end
 
   def index
-    @boards = Board.all
   end
 
   def detail
     @board_user_relation = BoardUserRelation.new
-    @boards = Board.all
     @board = Board.find(params[:id])
     session[:board_id] = @board.id
     cookies[:board_id] = @board.id
@@ -30,7 +27,6 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @boards = Board.all
     @board = Board.find(params[:id])
     session[:board_id] = @board.id
     cookies[:board_id] = @board.id
@@ -60,6 +56,10 @@ class BoardsController < ApplicationController
     @board.destroy
     flash[:success] = "Board deleted!"
     redirect_to root_url
+  end
+
+  def current_resource
+    @current_resource ||= Board.find(params[:id]) if params[:id]
   end
 
   private

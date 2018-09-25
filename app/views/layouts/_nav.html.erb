@@ -5,7 +5,7 @@
     <ul><a href="http://0.0.0.0:3000/boards">Overview</a></ul>
     <hr style="width: 75%;">
 
-    <% if @boards != nil %>
+    <% if Board.for(current_user) != nil %>
         <%= render 'boards/index' %>
     <% end %>
   </li>

@@ -1,5 +1,5 @@
 <ul class="boards">
-  <% @boards.each do |board| %>
+  <% Board.for(current_user).each do |board| %>
     <li>
       <div class="child-container">
         <div class="left-leaning">

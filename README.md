@@ -10,4 +10,4 @@ Current TODO as of Sep 23, 2018.
 * Add guide to README
 * Refactor code in controllers
 * Look into therapy after maintaining the board_week partial.
-* ...
+* Replace hardcoded anchorlink with proper link_to tags.

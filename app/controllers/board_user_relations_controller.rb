@@ -21,7 +21,6 @@ class BoardUserRelationsController < ApplicationController
   end
 
   def show
-    @boards = Board.all
     @board_user_relation = BoardUserRelation.find(params[:id])
   end
 
@@ -43,6 +42,10 @@ class BoardUserRelationsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def current_resource
+    @current_resource ||= BoardUserRelation.find(params[:f]) if params[:f]
   end
 
   private

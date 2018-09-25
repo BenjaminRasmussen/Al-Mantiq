@@ -6,7 +6,6 @@ class EventsController < ApplicationController
     @event = Event.new
     respond_modal_with @event
     @events = Event.all
-    @boards = Board.all
   end
 
   def create
@@ -21,7 +20,6 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    @boards = Board.all
   end
 
   def edit
@@ -49,6 +47,10 @@ class EventsController < ApplicationController
     @event.destroy
     flash[:success] = "Event deleted!"
     redirect_to root_url
+  end
+
+  def current_resource
+    @current_resource ||= Event.find(params[:id]) if params[:id]
   end
 
   private

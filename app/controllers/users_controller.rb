@@ -24,15 +24,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def boards
-    @boards ||= User.find_by(id: session[:user_id]).board_ids
-    lst_boards = []
-    for i in @boards
-      lst_boards.push([i.name])
-    end
-    return lst_boards
-  end
-
   def create
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
@@ -40,6 +31,10 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def current_resource
+    @current_resource ||= User.find(params[:id]) if params[:id]
   end
 
   # PATCH/PUT /users/1

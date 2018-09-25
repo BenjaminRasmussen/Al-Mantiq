@@ -1,7 +1,7 @@
 <div class="board-container" style="overflow:scroll;">
   <h1>These are your boards</h1>
   <ul class="boards">
-    <% @boards.each do |board| %>
+    <% Board.for(current_user).each do |board| %>
       <li>
         <h3>
           <a href="http://0.0.0.0:3000/boards/<%=board.id%>"><%=board.title%></a>
