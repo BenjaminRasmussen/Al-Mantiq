@@ -11,5 +11,6 @@ Current TODO as of Sep 25, 2018.
 * Replace hardcoded anchorlink with proper link_to tags.
 * Add testing
 * Restrict requests
+* Fix error alerts.
 
 *controllers are being refactored in steps.
